@@ -77,7 +77,7 @@ nav {
   align-items: center;
   padding-top: 68px;
 }
-.hero-image-panel {
+.hero-image-panel img {
   position: absolute;
   inset: 0;
   z-index: 0;

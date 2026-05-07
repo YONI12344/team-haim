@@ -83,7 +83,6 @@ nav {
   z-index: 0;
   overflow: hidden;
 }
-
 .hero-image-panel img {
   width: 100%;
   height: 100%;
@@ -177,8 +176,19 @@ nav {
   text-transform: uppercase;
 }
 
-/* BENEFITS */
+/* BENEFITS
+ * The <picture> element in index.html handles the desktop/mobile image swap:
+ *   desktop → yoni-train.jpeg | mobile → yoni-last.jpeg
+ * .benefits-bg-img controls sizing and framing for both breakpoints.
+ */
 .dark-section { background: var(--dark); padding: 7rem 4rem; }
+.benefits-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%; /* desktop framing */
+  display: block;
+}
 .benefits-grid {
   display: grid; grid-template-columns: repeat(2, 1fr); gap: 0;
   border: 1px solid rgba(201,168,76,0.12);
@@ -304,43 +314,75 @@ footer {
 }
 .wa-float:hover { transform: scale(1.08); }
 
-/* MOBILE */
+/* ============================================================
+   MOBILE — max-width: 900px
+   All mobile overrides live here. Desktop styles above are untouched.
+   ============================================================ */
 @media (max-width: 900px) {
   nav { padding: 1rem 1.5rem; }
   .nav-links { display: none; }
   .hamburger { display: flex; }
 
+  /* --- HERO: full-bleed background on mobile ---
+   * Hero becomes position:relative + full viewport height.
+   * The image panel goes back to position:absolute so it fills the whole section.
+   * The gradient overlay is re-enabled (bottom-heavy so text stays readable).
+   * Hero content background becomes transparent — text floats over the photo.
+   * object-position pulls the frame down to show body/action, not just the face.
+   */
   .hero {
+    position: relative;
     display: flex;
     flex-direction: column;
-    min-height: auto;
+    justify-content: flex-end;
+    min-height: 100svh;
     padding-top: 68px;
-    position: static;
   }
   .hero-image-panel {
-    position: relative;
-    inset: unset;
+    position: absolute;
+    inset: 0;
     width: 100%;
-    height: 85vw;
-    min-height: 320px;
-    max-height: 520px;
-    z-index: auto;
+    height: 100%;
+    min-height: unset;
+    max-height: unset;
+    z-index: 0;
   }
   .hero-image-panel img {
-    width: 100%; height: 100%;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
+    object-position: center 25%;
+  }
+  .hero-image-panel::after {
+    display: block;
+    background: linear-gradient(
+      to top,
+      rgba(12,12,12,0.97) 0%,
+      rgba(12,12,12,0.82) 40%,
+      rgba(12,12,12,0.35) 75%,
+      rgba(12,12,12,0.08) 100%
+    );
+  }
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 100%;
+    padding: 2.5rem 1.5rem 3rem;
+    background: transparent;
+  }
+
+  /* --- BENEFITS: adjust framing for yoni-last.jpeg on mobile ---
+   * The <picture> tag in HTML already swaps the src to yoni-last.jpeg.
+   * This rule only shifts the object-position for better framing.
+   */
+  .benefits-bg-img {
     object-position: center 20%;
   }
-  .hero-image-panel::after { display: none; }
 
-  .hero-content {
-    position: static;
-    z-index: auto;
-    max-width: 100%;
-    padding: 2.5rem 1.5rem 2rem;
-    background: var(--black);
-  }
+  /* --- METHOD: hide image column on mobile --- */
+  .method-image { display: none; }
 
+  /* Remaining layout adjustments */
   .about-grid, .method-grid, .whom-grid { grid-template-columns: 1fr; }
   .hero-title { font-size: clamp(2.8rem, 10vw, 4rem); }
   .hero-sub { font-size: 0.95rem; max-width: 100%; }
@@ -353,15 +395,12 @@ footer {
   .about-grid { gap: 2.5rem; }
   .about-text p { font-size: 0.9rem; }
   .about-image-stack img { max-height: 60vw; }
-
   .dark-section { padding: 4rem 1.2rem; }
   .benefits-grid { grid-template-columns: 1fr; }
   .benefit-item { padding: 1.4rem 1.2rem; }
   .benefit-title { font-size: 1rem; }
   .benefit-desc { font-size: 0.88rem; line-height: 1.65; }
-
   .method-grid { gap: 2rem; }
-  .method-image { display: none; }
   .step { gap: 1rem; }
   .cta-title { font-size: clamp(2rem, 8vw, 3.5rem); }
   .cta-inner { max-width: 100%; }
@@ -399,10 +438,6 @@ footer {
     transform: scale(0.96);
     transition: transform 0.1s;
   }
-  .who-card:active {
-    background: rgba(201,168,76,0.08);
-  }
-  .wa-float:active {
-    transform: scale(0.93);
- }
+  .who-card:active { background: rgba(201,168,76,0.08); }
+  .wa-float:active { transform: scale(0.93); }
 }

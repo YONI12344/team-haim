@@ -37,8 +37,7 @@ nav {
 .nav-links { display: flex; gap: 2.5rem; list-style: none; }
 .nav-links a {
   color: #888; text-decoration: none; font-size: 0.82rem;
-  font-weight: 400; letter-spacing: 1.5px;
-  transition: color 0.2s;
+  font-weight: 400; letter-spacing: 1.5px; transition: color 0.2s;
 }
 .nav-links a:hover { color: var(--gold); }
 
@@ -64,51 +63,44 @@ nav {
 .mobile-menu.open { display: flex; }
 .mobile-menu a {
   color: var(--white); text-decoration: none; font-size: 1.5rem;
-  font-family: 'Bebas Neue', sans-serif; letter-spacing: 4px;
-  transition: color 0.2s;
+  font-family: 'Bebas Neue', sans-serif; letter-spacing: 4px; transition: color 0.2s;
 }
 .mobile-menu a:hover { color: var(--gold); }
 
-/* HERO */
+/* ==============================================================
+   HERO — DESKTOP
+   Pure solid background (var(--black)), no photo.
+   Three child zones stack vertically in the centre of the viewport.
+   hero-header  : tag + title
+   hero-image-panel : HIDDEN on desktop
+   hero-content : bio paragraph + buttons
+   ============================================================== */
 .hero {
   min-height: 100vh;
-  position: relative;
+  background: var(--black);           /* solid colour, no image */
   display: flex;
-  align-items: center;
-  padding-top: 68px;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 68px;                  /* clear the fixed nav */
 }
-.hero-image-panel {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
-}
-.hero-image-panel img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-}
-.hero-image-panel::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to right,
-    rgba(12,12,12,0.15) 0%,
-    rgba(12,12,12,0.55) 45%,
-    rgba(12,12,12,0.92) 75%,
-    rgba(12,12,12,0.97) 100%
-  );
-}
-.hero-content {
-  position: relative;
-  z-index: 1;
+
+/* Tag + title — always on solid black */
+.hero-header {
   max-width: 580px;
-  padding: 5rem 4rem;
-  margin-right: 0;
+  padding: 3rem 4rem 0;
 }
+
+/* Photo — hidden entirely on desktop */
+.hero-image-panel {
+  display: none;
+}
+
+/* Bio text + CTA buttons */
+.hero-content {
+  max-width: 580px;
+  padding: 1.5rem 4rem 5rem;
+}
+
 .hero-tag {
   font-size: 0.72rem; font-weight: 400; letter-spacing: 4px;
   color: var(--gold); text-transform: uppercase; margin-bottom: 2rem;
@@ -125,6 +117,8 @@ nav {
   line-height: 1.9; margin-bottom: 2.5rem; font-weight: 300;
 }
 .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+/* BUTTONS */
 .btn-gold {
   background: var(--gold); color: var(--black);
   border: none; padding: 0.8rem 2rem;
@@ -162,9 +156,7 @@ nav {
 
 /* ABOUT */
 .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
-.about-text p {
-  font-size: 0.95rem; line-height: 1.9; color: #aaa; margin-bottom: 1.3rem;
-}
+.about-text p { font-size: 0.95rem; line-height: 1.9; color: #aaa; margin-bottom: 1.3rem; }
 .about-text p:last-child { margin-bottom: 0; }
 .about-image-stack { position: relative; }
 .about-image-stack img {
@@ -176,19 +168,49 @@ nav {
   text-transform: uppercase;
 }
 
-/* BENEFITS
- * The <picture> element in index.html handles the desktop/mobile image swap:
- *   desktop → yoni-train.jpeg | mobile → yoni-last.jpeg
- * .benefits-bg-img controls sizing and framing for both breakpoints.
- */
+/* ==============================================================
+   BENEFITS — DESKTOP
+   Full-width section (no container constrains it).
+   Background photo is managed by .benefits-bg-wrap (absolute, inset:0).
+   Content lives in .benefits-body which sits above the bg via z-index.
+   ============================================================== */
 .dark-section { background: var(--dark); padding: 7rem 4rem; }
+
+#benefits {
+  position: relative;
+  overflow: hidden;
+  width: 100%;       /* explicit full-width */
+}
+
+/* Absolutely-positioned wrapper that fills the entire section */
+.benefits-bg-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+/* Desktop image: yoni-train.jpeg, framed to show the action zone */
 .benefits-bg-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 30%; /* desktop framing */
+  object-position: center 30%;
   display: block;
 }
+
+/* Dark overlay for text legibility */
+.benefits-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(12, 12, 12, 0.84);
+}
+
+/* Content sits above background layers */
+.benefits-body {
+  position: relative;
+  z-index: 1;
+}
+
 .benefits-grid {
   display: grid; grid-template-columns: repeat(2, 1fr); gap: 0;
   border: 1px solid rgba(201,168,76,0.12);
@@ -254,39 +276,12 @@ nav {
   padding: 0.4rem 1rem; font-size: 0.78rem; letter-spacing: 1px;
 }
 
-/* FOR WHOM */
-.whom-section { padding: 7rem 4rem; }
-.whom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem; }
-.whom-box { padding: 2.5rem; border: 1px solid rgba(255,255,255,0.06); }
-.whom-box.yes { border-color: rgba(201,168,76,0.25); }
-.whom-box-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.3rem; letter-spacing: 2px; margin-bottom: 1.8rem;
-}
-.whom-box.yes .whom-box-title { color: var(--gold); }
-.whom-box.no .whom-box-title { color: #444; }
-.whom-list { list-style: none; }
-.whom-list li {
-  font-size: 0.88rem; color: #999; padding: 0.7rem 0;
-  border-bottom: 1px solid rgba(255,255,255,0.04);
-  display: flex; align-items: center; gap: 1rem;
-}
-.whom-list li:last-child { border-bottom: none; }
-.whom-box.yes li::before { content: '✓'; color: var(--gold); font-size: 0.7rem; }
-.whom-box.no li::before { content: '✗'; color: #333; font-size: 0.7rem; }
-
 /* WHO GRID */
-.who-card {
-  background: var(--black);
-  transition: background 0.25s;
-  -webkit-tap-highlight-color: transparent;
-}
+.who-card { background: var(--black); transition: background 0.25s; -webkit-tap-highlight-color: transparent; }
 .who-card:hover { background: rgba(201,168,76,0.05); }
 .who-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0;
-  border: 1px solid rgba(201,168,76,0.15);
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 0; border: 1px solid rgba(201,168,76,0.15);
 }
 
 /* FOOTER */
@@ -309,88 +304,93 @@ footer {
   display: flex; align-items: center; justify-content: center;
   font-size: 1.4rem; text-decoration: none;
   box-shadow: 0 4px 20px rgba(37,211,102,0.3);
-  transition: transform 0.2s;
-  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.2s; -webkit-tap-highlight-color: transparent;
 }
 .wa-float:hover { transform: scale(1.08); }
 
-/* ============================================================
+/* ==============================================================
    MOBILE — max-width: 900px
-   All mobile overrides live here. Desktop styles above are untouched.
-   ============================================================ */
+   All phone-specific overrides live here.
+   Desktop styles above are completely untouched.
+   ============================================================== */
 @media (max-width: 900px) {
   nav { padding: 1rem 1.5rem; }
   .nav-links { display: none; }
   .hamburger { display: flex; }
 
-  /* --- HERO: full-bleed background on mobile ---
-   * Hero becomes position:relative + full viewport height.
-   * The image panel goes back to position:absolute so it fills the whole section.
-   * The gradient overlay is re-enabled (bottom-heavy so text stays readable).
-   * Hero content background becomes transparent — text floats over the photo.
-   * object-position pulls the frame down to show body/action, not just the face.
+  /* --- HERO: three-zone stacked layout ---
+   *
+   * Zone 1 (hero-header):  tag + title on solid black.
+   * Zone 2 (hero-image-panel): photo shown as a full-width block,
+   *   appears visually between the title and the bio text.
+   * Zone 3 (hero-content): bio paragraph + buttons on solid black.
+   *
+   * The image is NOT behind the title — it only starts after it.
    */
   .hero {
-    position: relative;
-    display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    min-height: 100svh;
+    justify-content: flex-start;
+    min-height: auto;
+    background: var(--black);
     padding-top: 68px;
   }
+
+  /* Zone 1: tag + title — pure black, full width */
+  .hero-header {
+    max-width: 100%;
+    padding: 2.5rem 1.5rem 2rem;
+    background: var(--black);
+  }
+
+  /* Zone 2: photo shown as a block between header and bio */
   .hero-image-panel {
-    position: absolute;
-    inset: 0;
+    display: block;
+    position: relative;        /* out of absolute flow — stacks naturally */
     width: 100%;
-    height: 100%;
-    min-height: unset;
-    max-height: unset;
-    z-index: 0;
+    height: 72vw;              /* tall enough to show meaningful portion of image */
+    min-height: 280px;
+    max-height: 480px;
+    overflow: hidden;
   }
   .hero-image-panel img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 25%;
-  }
-  .hero-image-panel::after {
+    object-position: center 20%; /* frame to show body/action, not just the face */
     display: block;
-    background: linear-gradient(
-      to top,
-      rgba(12,12,12,0.97) 0%,
-      rgba(12,12,12,0.82) 40%,
-      rgba(12,12,12,0.35) 75%,
-      rgba(12,12,12,0.08) 100%
-    );
   }
+
+  /* Zone 3: bio + buttons — pure black below the photo */
   .hero-content {
-    position: relative;
-    z-index: 1;
     max-width: 100%;
-    padding: 2.5rem 1.5rem 3rem;
-    background: transparent;
+    padding: 2rem 1.5rem 2.5rem;
+    background: var(--black);
   }
 
-  /* --- BENEFITS: adjust framing for yoni-last.jpeg on mobile ---
-   * The <picture> tag in HTML already swaps the src to yoni-last.jpeg.
-   * This rule only shifts the object-position for better framing.
-   */
-  .benefits-bg-img {
-    object-position: center 20%;
-  }
-
-  /* --- METHOD: hide image column on mobile --- */
-  .method-image { display: none; }
-
-  /* Remaining layout adjustments */
-  .about-grid, .method-grid, .whom-grid { grid-template-columns: 1fr; }
   .hero-title { font-size: clamp(2.8rem, 10vw, 4rem); }
   .hero-sub { font-size: 0.95rem; max-width: 100%; }
   .hero-btns { flex-direction: column; gap: 0.8rem; }
   .btn-gold, .btn-outline {
     width: 100%; text-align: center; padding: 1rem 1.5rem; font-size: 1rem;
   }
-  .section, .cta-section, .whom-section { padding: 4rem 1.2rem; }
+
+  /* --- BENEFITS: 3/4 rule for yoni-last.jpeg ---
+   *
+   * The <picture> element already swaps the src to yoni-last.jpeg.
+   * object-position: center 75% pushes the top 3/4 of the image upward
+   * so only the bottom quarter is visible in the frame.
+   * This keeps the image from competing with the text at the top of the section.
+   */
+  .benefits-bg-img {
+    object-position: center 75%;
+  }
+
+  /* --- METHOD: image column hidden on mobile --- */
+  .method-image { display: none; }
+
+  /* Remaining layout adjustments */
+  .about-grid, .method-grid { grid-template-columns: 1fr; }
+  .section, .cta-section { padding: 4rem 1.2rem; }
   .section-title { font-size: clamp(2rem, 7vw, 3rem); }
   .about-grid { gap: 2.5rem; }
   .about-text p { font-size: 0.9rem; }
@@ -406,7 +406,6 @@ footer {
   .cta-inner { max-width: 100%; }
   .cta-includes { gap: 0.4rem; }
   .tag { font-size: 0.72rem; padding: 0.35rem 0.8rem; }
-  .whom-grid { grid-template-columns: 1fr; gap: 1rem; }
   footer { padding: 3rem 1.2rem; }
   .footer-logo { font-size: 1.6rem; }
   .wa-float { bottom: 1.2rem; left: 1.2rem; width: 46px; height: 46px; font-size: 1.2rem; }
@@ -422,22 +421,13 @@ footer {
 @media (max-width: 390px) {
   .hero-title { font-size: 2.5rem; }
   .hero-tag { font-size: 0.65rem; }
-  .section, .dark-section, .cta-section, .whom-section { padding: 3rem 1rem; }
+  .section, .dark-section, .cta-section { padding: 3rem 1rem; }
   .section-label { font-size: 0.62rem; letter-spacing: 3px; }
 }
 
 @media (hover: none) {
-  .btn-gold:active {
-    background: var(--gold-light);
-    transform: scale(0.96);
-    transition: transform 0.1s, background 0.1s;
-  }
-  .btn-outline:active {
-    border-color: var(--gold);
-    color: var(--gold);
-    transform: scale(0.96);
-    transition: transform 0.1s;
-  }
+  .btn-gold:active { background: var(--gold-light); transform: scale(0.96); transition: transform 0.1s, background 0.1s; }
+  .btn-outline:active { border-color: var(--gold); color: var(--gold); transform: scale(0.96); transition: transform 0.1s; }
   .who-card:active { background: rgba(201,168,76,0.08); }
   .wa-float:active { transform: scale(0.93); }
 }

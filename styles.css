@@ -52,30 +52,69 @@ nav { position: fixed; top: 0; right: 0; left: 0; z-index: 100; display: flex; j
 .hero {
   min-height: 100vh;
   padding-top: 68px;
+
+  /* creates 2 columns */
   display: grid;
+
+  /* LEFT = image / RIGHT = text */
   grid-template-columns: 55% 45%;
-  direction: ltr;          /* enforce LTR column order: image LEFT, text RIGHT */
+
+  /* keeps image physically on left side */
+  direction: ltr;
+
   background: var(--black);
 }
 
-/* Image — left column on desktop */
+
+/* IMAGE COLUMN */
 .hero-image-panel {
   direction: rtl;
   position: relative;
+
+  /* hides anything outside the frame */
   overflow: hidden;
-hero-image-panel img {
+}
+
+
+/* THE ACTUAL IMAGE */
+.hero-image-panel img {
   width: 100%;
   height: 100%;
+
+  /* fills entire area */
   object-fit: cover;
 
-  /* PLAY WITH THIS */
-  object-position: left center;
+  /*
+    THIS IS THE MAIN CONTROL
+
+    first value = left/right
+    second value = up/down
+  */
+
+  /* move image LEFT */
+  object-position: 20% center;
+
+  /*
+    cinematic luxury effect
+  */
+  transform: scale(1.03);
+
+  /*
+    darkens image slightly
+  */
+  filter: brightness(0.88);
+
+  display: block;
 }
-/* Gradient overlay — disabled on desktop (image is in its own clean column) */
+
+
+/* OVERLAY */
 .hero-image-panel::after {
   content: '';
   position: absolute;
   inset: 0;
+
+  /* currently disabled */
   display: none;
 }
 

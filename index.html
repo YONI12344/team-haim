@@ -116,10 +116,17 @@
   </div>
 </section>
 
-<!-- BENEFITS with background image -->
+<!-- BENEFITS
+     Desktop shows yoni-train.jpeg, mobile shows yoni-last.jpeg.
+     Swapping is handled by the <picture> element — no JS needed.
+     object-position for each image is controlled via .benefits-bg-img in CSS.
+-->
 <section class="benefits dark-section" id="benefits" style="position:relative;overflow:hidden;">
   <div style="position:absolute;inset:0;z-index:0;">
-    <img src="yoni-train.jpeg" alt="Training" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;">
+    <picture>
+      <source media="(max-width: 900px)" srcset="yoni-last.jpeg">
+      <img class="benefits-bg-img" src="yoni-train.jpeg" alt="Training">
+    </picture>
     <div style="position:absolute;inset:0;background:rgba(12,12,12,0.84);"></div>
   </div>
   <div style="position:relative;z-index:1;">

@@ -22,7 +22,7 @@ body {
   font-weight: 300;
 }
 
-/* NAV */
+/* ── NAV ──────────────────────────────────────────────── */
 nav {
   position: fixed; top: 0; right: 0; left: 0; z-index: 100;
   display: flex; justify-content: space-between; align-items: center;
@@ -30,303 +30,188 @@ nav {
   background: rgba(12,12,12,0.96);
   border-bottom: 1px solid rgba(201,168,76,0.15);
 }
-.nav-logo {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.5rem; letter-spacing: 4px; color: var(--gold);
-}
+.nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 4px; color: var(--gold); }
 .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-.nav-links a {
-  color: #888; text-decoration: none; font-size: 0.82rem;
-  font-weight: 400; letter-spacing: 1.5px; transition: color 0.2s;
-}
+.nav-links a { color: #888; text-decoration: none; font-size: 0.82rem; font-weight: 400; letter-spacing: 1.5px; transition: color 0.2s; }
 .nav-links a:hover { color: var(--gold); }
 
-/* HAMBURGER */
-.hamburger {
-  display: none; flex-direction: column; justify-content: center;
-  gap: 5px; cursor: pointer; padding: 4px; background: none; border: none;
-}
-.hamburger span {
-  display: block; width: 22px; height: 2px;
-  background: var(--gold); transition: all 0.3s;
-}
+.hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+.hamburger span { display: block; width: 22px; height: 2px; background: var(--gold); transition: all 0.3s; }
 .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
 .hamburger.open span:nth-child(2) { opacity: 0; }
 .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
-/* MOBILE NAV DRAWER */
-.mobile-menu {
-  display: none; position: fixed; top: 0; right: 0; left: 0; bottom: 0;
-  background: rgba(12,12,12,0.98); z-index: 99;
-  flex-direction: column; align-items: center; justify-content: center; gap: 2rem;
-}
+.mobile-menu { display: none; position: fixed; top: 0; right: 0; left: 0; bottom: 0; background: rgba(12,12,12,0.98); z-index: 99; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; }
 .mobile-menu.open { display: flex; }
-.mobile-menu a {
-  color: var(--white); text-decoration: none; font-size: 1.5rem;
-  font-family: 'Bebas Neue', sans-serif; letter-spacing: 4px; transition: color 0.2s;
-}
+.mobile-menu a { color: var(--white); text-decoration: none; font-size: 1.5rem; font-family: 'Bebas Neue', sans-serif; letter-spacing: 4px; transition: color 0.2s; }
 .mobile-menu a:hover { color: var(--gold); }
 
-/* ==============================================================
-   HERO — DESKTOP
-   Pure solid background (var(--black)), no photo.
-   Three child zones stack vertically in the centre of the viewport.
-   hero-header  : tag + title
-   hero-image-panel : HIDDEN on desktop
-   hero-content : bio paragraph + buttons
-   ============================================================== */
+/* ── HERO — DESKTOP ───────────────────────────────────────
+   Solid black background. No photo at all.
+   hero-header  (tag + title) and hero-content (bio + buttons)
+   stack vertically and are centred in the viewport.
+   hero-image-panel is HIDDEN on desktop.
+   hero-bottom is a transparent pass-through flex column.
+   ─────────────────────────────────────────────────────── */
 .hero {
   min-height: 100vh;
-  background: var(--black);           /* solid colour, no image */
+  background: var(--black);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: 68px;                  /* clear the fixed nav */
+  padding-top: 68px;
 }
-
-/* Tag + title — always on solid black */
 .hero-header {
   max-width: 580px;
   padding: 3rem 4rem 0;
 }
-
-/* Photo — hidden entirely on desktop */
-.hero-image-panel {
-  display: none;
-}
-
-/* Bio text + CTA buttons */
-.hero-content {
+/* Pass-through container — on desktop it just stacks its children */
+.hero-bottom {
   max-width: 580px;
-  padding: 1.5rem 4rem 5rem;
+  display: flex;
+  flex-direction: column;
 }
+/* Photo: completely hidden on desktop */
+.hero-image-panel { display: none; }
 
-.hero-tag {
-  font-size: 0.72rem; font-weight: 400; letter-spacing: 4px;
-  color: var(--gold); text-transform: uppercase; margin-bottom: 2rem;
-}
-.hero-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(3rem, 5.5vw, 5.5rem);
-  line-height: 0.95; letter-spacing: 1px;
-  color: var(--white); margin-bottom: 1.5rem;
-}
+.hero-content { padding: 1.5rem 4rem 5rem; }
+
+.hero-tag { font-size: 0.72rem; font-weight: 400; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; margin-bottom: 2rem; }
+.hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 5.5vw, 5.5rem); line-height: 0.95; letter-spacing: 1px; color: var(--white); margin-bottom: 1.5rem; }
 .hero-title em { color: var(--gold); font-style: normal; }
-.hero-sub {
-  font-size: 1rem; color: rgba(255,255,255,0.85); max-width: 420px;
-  line-height: 1.9; margin-bottom: 2.5rem; font-weight: 300;
-}
+.hero-sub { font-size: 1rem; color: rgba(255,255,255,0.85); max-width: 420px; line-height: 1.9; margin-bottom: 2.5rem; font-weight: 300; }
 .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
 
-/* BUTTONS */
-.btn-gold {
-  background: var(--gold); color: var(--black);
-  border: none; padding: 0.8rem 2rem;
-  font-family: 'Heebo', sans-serif; font-size: 0.9rem; font-weight: 700;
-  cursor: pointer; letter-spacing: 0.5px;
-  transition: background 0.2s, transform 0.15s;
-  text-decoration: none; display: inline-block;
-  -webkit-tap-highlight-color: transparent;
-}
+/* ── BUTTONS ──────────────────────────────────────────── */
+.btn-gold { background: var(--gold); color: var(--black); border: none; padding: 0.8rem 2rem; font-family: 'Heebo', sans-serif; font-size: 0.9rem; font-weight: 700; cursor: pointer; letter-spacing: 0.5px; transition: background 0.2s, transform 0.15s; text-decoration: none; display: inline-block; -webkit-tap-highlight-color: transparent; }
 .btn-gold:hover { background: var(--gold-light); transform: translateY(-1px); }
-.btn-outline {
-  background: transparent; color: var(--white);
-  border: 1px solid rgba(201,168,76,0.4); padding: 0.8rem 2rem;
-  font-family: 'Heebo', sans-serif; font-size: 0.9rem; font-weight: 400;
-  cursor: pointer; letter-spacing: 0.5px;
-  transition: border-color 0.2s, color 0.2s, transform 0.15s;
-  text-decoration: none; display: inline-block;
-  -webkit-tap-highlight-color: transparent;
-}
+.btn-outline { background: transparent; color: var(--white); border: 1px solid rgba(201,168,76,0.4); padding: 0.8rem 2rem; font-family: 'Heebo', sans-serif; font-size: 0.9rem; font-weight: 400; cursor: pointer; letter-spacing: 0.5px; transition: border-color 0.2s, color 0.2s, transform 0.15s; text-decoration: none; display: inline-block; -webkit-tap-highlight-color: transparent; }
 .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
 
-/* SECTION BASE */
+/* ── SECTION BASE ─────────────────────────────────────── */
 .section { padding: 7rem 4rem; }
-.section-label {
-  font-size: 0.7rem; letter-spacing: 5px; color: var(--gold);
-  text-transform: uppercase; margin-bottom: 2rem;
-  display: flex; align-items: center; gap: 1.2rem;
-}
+.section-label { font-size: 0.7rem; letter-spacing: 5px; color: var(--gold); text-transform: uppercase; margin-bottom: 2rem; display: flex; align-items: center; gap: 1.2rem; }
 .section-label::after { content: ''; flex: 1; height: 1px; background: rgba(201,168,76,0.2); }
-.section-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(2.2rem, 4vw, 3.2rem);
-  line-height: 1; letter-spacing: 1px; margin-bottom: 2rem;
-}
+.section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.2rem, 4vw, 3.2rem); line-height: 1; letter-spacing: 1px; margin-bottom: 2rem; }
 
-/* ABOUT */
+/* ── ABOUT ────────────────────────────────────────────── */
 .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
 .about-text p { font-size: 0.95rem; line-height: 1.9; color: #aaa; margin-bottom: 1.3rem; }
 .about-text p:last-child { margin-bottom: 0; }
 .about-image-stack { position: relative; }
-.about-image-stack img {
-  width: 100%; display: block;
-  object-fit: cover; object-position: center 15%; max-height: 420px;
-}
-.about-image-caption {
-  margin-top: 1rem; font-size: 0.75rem; color: #555; letter-spacing: 1px;
-  text-transform: uppercase;
-}
+.about-image-stack img { width: 100%; display: block; object-fit: cover; object-position: center 15%; max-height: 420px; }
+.about-image-caption { margin-top: 1rem; font-size: 0.75rem; color: #555; letter-spacing: 1px; text-transform: uppercase; }
 
-/* ==============================================================
-   BENEFITS — DESKTOP
-   Full-width section (no container constrains it).
-   Background photo is managed by .benefits-bg-wrap (absolute, inset:0).
-   Content lives in .benefits-body which sits above the bg via z-index.
-   ============================================================== */
+/* ── BENEFITS — DESKTOP ───────────────────────────────────
+   Desktop: solid dark background only. NO background photo.
+   .benefits-bg-wrap is hidden by default (desktop); it is
+   revealed only on mobile via the @media block below.
+   ─────────────────────────────────────────────────────── */
 .dark-section { background: var(--dark); padding: 7rem 4rem; }
 
 #benefits {
   position: relative;
   overflow: hidden;
-  width: 100%;       /* explicit full-width */
+  width: 100%;
 }
 
-/* Absolutely-positioned wrapper that fills the entire section */
+/* Background image wrapper — HIDDEN on desktop */
+.benefits-bg-wrap { display: none; }
+
+/* These styles are defined here so they're ready when mobile enables the wrapper */
 .benefits-bg-wrap {
   position: absolute;
   inset: 0;
   z-index: 0;
 }
-
-/* Desktop image: yoni-train.jpeg, framed to show the action zone */
 .benefits-bg-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 30%;
+  object-position: center 30%; /* desktop default — overridden on mobile */
   display: block;
 }
-
-/* Dark overlay for text legibility */
 .benefits-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(12, 12, 12, 0.84);
+  background: rgba(12, 12, 12, 0.82);
 }
-
-/* Content sits above background layers */
 .benefits-body {
   position: relative;
   z-index: 1;
 }
 
-.benefits-grid {
-  display: grid; grid-template-columns: repeat(2, 1fr); gap: 0;
-  border: 1px solid rgba(201,168,76,0.12);
-  margin-top: 3rem;
-}
-.benefit-item {
-  padding: 2.2rem 2.5rem;
-  border-bottom: 1px solid rgba(201,168,76,0.1);
-  border-left: 1px solid rgba(201,168,76,0.1);
-  transition: background 0.2s;
-}
+.benefits-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; border: 1px solid rgba(201,168,76,0.12); margin-top: 3rem; }
+.benefit-item { padding: 2.2rem 2.5rem; border-bottom: 1px solid rgba(201,168,76,0.1); border-left: 1px solid rgba(201,168,76,0.1); transition: background 0.2s; }
 .benefit-item:hover { background: rgba(201,168,76,0.06); }
-.benefit-num {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1rem; color: var(--gold-dim); letter-spacing: 2px; margin-bottom: 0.8rem;
-}
-.benefit-title {
-  font-size: 0.95rem; font-weight: 700; color: var(--white);
-  margin-bottom: 0.5rem; text-shadow: 0 1px 6px rgba(0,0,0,0.9);
-}
-.benefit-desc {
-  font-size: 0.85rem; color: #ccc; line-height: 1.7;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.9);
-}
+.benefit-num { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; color: var(--gold-dim); letter-spacing: 2px; margin-bottom: 0.8rem; }
+.benefit-title { font-size: 0.95rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; text-shadow: 0 1px 6px rgba(0,0,0,0.9); }
+.benefit-desc { font-size: 0.85rem; color: #ccc; line-height: 1.7; text-shadow: 0 1px 4px rgba(0,0,0,0.9); }
 
-/* METHOD */
+/* ── METHOD ───────────────────────────────────────────── */
 .method-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; margin-top: 3rem; }
-.step {
-  display: grid; grid-template-columns: 2.5rem 1fr;
-  gap: 1.5rem; padding: 1.5rem 0;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-  align-items: start;
-}
-.step-num {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.1rem; color: var(--gold); opacity: 0.5; padding-top: 2px;
-}
+.step { display: grid; grid-template-columns: 2.5rem 1fr; gap: 1.5rem; padding: 1.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.06); align-items: start; }
+.step-num { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; color: var(--gold); opacity: 0.5; padding-top: 2px; }
 .step-title { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.3rem; }
 .step-desc { font-size: 0.83rem; color: #777; line-height: 1.7; }
 .method-image { overflow: hidden; }
-.method-image img {
-  width: 100%; height: 100%; object-fit: cover;
-  object-position: 30% center; display: block; min-height: 500px;
-}
+.method-image img { width: 100%; height: 100%; object-fit: cover; object-position: 30% center; display: block; min-height: 500px; }
 
-/* COACHING CTA */
-.cta-section {
-  background: var(--dark2); padding: 7rem 4rem;
-  border-top: 1px solid rgba(201,168,76,0.15);
-  border-bottom: 1px solid rgba(201,168,76,0.15);
-}
+/* ── CTA ──────────────────────────────────────────────── */
+.cta-section { background: var(--dark2); padding: 7rem 4rem; border-top: 1px solid rgba(201,168,76,0.15); border-bottom: 1px solid rgba(201,168,76,0.15); }
 .cta-inner { max-width: 700px; }
-.cta-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: 1px;
-  color: var(--white); margin-bottom: 1rem; line-height: 1;
-}
+.cta-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: 1px; color: var(--white); margin-bottom: 1rem; line-height: 1; }
 .cta-title em { color: var(--gold); font-style: normal; }
 .cta-body { font-size: 0.95rem; color: #999; line-height: 1.9; margin-bottom: 2.5rem; max-width: 500px; }
 .cta-includes { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2.5rem; }
-.tag {
-  border: 1px solid rgba(201,168,76,0.3); color: var(--gold);
-  padding: 0.4rem 1rem; font-size: 0.78rem; letter-spacing: 1px;
-}
+.tag { border: 1px solid rgba(201,168,76,0.3); color: var(--gold); padding: 0.4rem 1rem; font-size: 0.78rem; letter-spacing: 1px; }
 
-/* WHO GRID */
+/* ── WHO GRID ─────────────────────────────────────────── */
 .who-card { background: var(--black); transition: background 0.25s; -webkit-tap-highlight-color: transparent; }
 .who-card:hover { background: rgba(201,168,76,0.05); }
-.who-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 0; border: 1px solid rgba(201,168,76,0.15);
-}
+.who-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid rgba(201,168,76,0.15); }
 
-/* FOOTER */
-footer {
-  background: #080808; padding: 4rem; text-align: center;
-  border-top: 1px solid rgba(201,168,76,0.1);
-}
-.footer-logo {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 2rem; letter-spacing: 6px; color: var(--gold); margin-bottom: 0.5rem;
-}
+/* ── FOOTER ───────────────────────────────────────────── */
+footer { background: #080808; padding: 4rem; text-align: center; border-top: 1px solid rgba(201,168,76,0.1); }
+.footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 6px; color: var(--gold); margin-bottom: 0.5rem; }
 .footer-tag { font-size: 0.8rem; color: #444; margin-bottom: 2.5rem; letter-spacing: 1px; }
 .footer-bottom { font-size: 0.72rem; color: #333; }
 
-/* WHATSAPP FLOAT */
-.wa-float {
-  position: fixed; bottom: 2rem; left: 2rem; z-index: 50;
-  background: #25D366; color: white;
-  width: 52px; height: 52px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.4rem; text-decoration: none;
-  box-shadow: 0 4px 20px rgba(37,211,102,0.3);
-  transition: transform 0.2s; -webkit-tap-highlight-color: transparent;
-}
+/* ── WHATSAPP FLOAT ───────────────────────────────────── */
+.wa-float { position: fixed; bottom: 2rem; left: 2rem; z-index: 50; background: #25D366; color: white; width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; text-decoration: none; box-shadow: 0 4px 20px rgba(37,211,102,0.3); transition: transform 0.2s; -webkit-tap-highlight-color: transparent; }
 .wa-float:hover { transform: scale(1.08); }
 
-/* ==============================================================
-   MOBILE — max-width: 900px
-   All phone-specific overrides live here.
-   Desktop styles above are completely untouched.
-   ============================================================== */
+
+/* ══════════════════════════════════════════════════════════
+   MOBILE  max-width: 900px
+   Every phone-specific override lives here.
+   Desktop rules above are completely untouched.
+   ══════════════════════════════════════════════════════════ */
 @media (max-width: 900px) {
+
   nav { padding: 1rem 1.5rem; }
   .nav-links { display: none; }
   .hamburger { display: flex; }
 
-  /* --- HERO: three-zone stacked layout ---
-   *
-   * Zone 1 (hero-header):  tag + title on solid black.
-   * Zone 2 (hero-image-panel): photo shown as a full-width block,
-   *   appears visually between the title and the bio text.
-   * Zone 3 (hero-content): bio paragraph + buttons on solid black.
-   *
-   * The image is NOT behind the title — it only starts after it.
-   */
+  /* ── HERO — MOBILE ────────────────────────────────────────
+     Two visual zones:
+
+     ZONE 1  hero-header
+       Solid black (#0c0c0c). Contains only the tag line and the
+       main headline "רצים עם הלב / חוגגים את החיים."
+       Sits above everything, untouched by the photo.
+
+     ZONE 2  hero-bottom
+       A position:relative container. Inside it:
+         • hero-image-panel — position:absolute, fills hero-bottom
+           completely. Uses object-position:top so the full body
+           is visible, not just a zoomed-in face. A gradient overlay
+           darkens the lower portion so text stays readable.
+         • hero-content — position:relative z-index:1. The bio text
+           "אני יהונתן..." and the CTA buttons float above the photo.
+       hero-bottom is made tall enough (min-height: max(420px,115vw))
+       so the photo extends all the way down to the #about section.
+     ─────────────────────────────────────────────────────── */
   .hero {
     flex-direction: column;
     justify-content: flex-start;
@@ -335,60 +220,89 @@ footer {
     padding-top: 68px;
   }
 
-  /* Zone 1: tag + title — pure black, full width */
+  /* Zone 1: pure solid black — tag + title only */
   .hero-header {
     max-width: 100%;
     padding: 2.5rem 1.5rem 2rem;
     background: var(--black);
+    position: relative;
+    z-index: 2;
   }
 
-  /* Zone 2: photo shown as a block between header and bio */
+  /* Zone 2: the image-as-background container */
+  .hero-bottom {
+    max-width: 100%;
+    position: relative;
+    /* tall enough to show the full body and reach the About section */
+    min-height: max(420px, 115vw);
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Photo: revealed on mobile as an absolute background */
   .hero-image-panel {
     display: block;
-    position: relative;        /* out of absolute flow — stacks naturally */
-    width: 100%;
-    height: 72vw;              /* tall enough to show meaningful portion of image */
-    min-height: 280px;
-    max-height: 480px;
+    position: absolute;
+    inset: 0;
+    z-index: 0;
     overflow: hidden;
   }
   .hero-image-panel img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 20%; /* frame to show body/action, not just the face */
+    /* "top" shows from the head downward — most of the body is visible */
+    object-position: center top;
     display: block;
   }
+  /* Gradient overlay: transparent at top (show image), darker at bottom (readable text) */
+  .hero-image-panel::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(12,12,12,0.15) 0%,
+      rgba(12,12,12,0.45) 55%,
+      rgba(12,12,12,0.78) 100%
+    );
+  }
 
-  /* Zone 3: bio + buttons — pure black below the photo */
+  /* Bio + buttons float above the photo */
   .hero-content {
+    position: relative;
+    z-index: 1;
     max-width: 100%;
     padding: 2rem 1.5rem 2.5rem;
-    background: var(--black);
+    background: transparent;
+    margin-top: auto; /* pushes content toward the bottom of the image */
   }
 
   .hero-title { font-size: clamp(2.8rem, 10vw, 4rem); }
   .hero-sub { font-size: 0.95rem; max-width: 100%; }
   .hero-btns { flex-direction: column; gap: 0.8rem; }
-  .btn-gold, .btn-outline {
-    width: 100%; text-align: center; padding: 1rem 1.5rem; font-size: 1rem;
-  }
+  .btn-gold, .btn-outline { width: 100%; text-align: center; padding: 1rem 1.5rem; font-size: 1rem; }
 
-  /* --- BENEFITS: 3/4 rule for yoni-last.jpeg ---
-   *
-   * The <picture> element already swaps the src to yoni-last.jpeg.
-   * object-position: center 75% pushes the top 3/4 of the image upward
-   * so only the bottom quarter is visible in the frame.
-   * This keeps the image from competing with the text at the top of the section.
-   */
+  /* ── BENEFITS — MOBILE ────────────────────────────────────
+     Show the background image (yoni-last.jpeg) on mobile only.
+     object-position: center 65% shows the lower portion of the
+     photo — less face, more torso/body — so it doesn't compete
+     with the text grid sitting above it.
+     ─────────────────────────────────────────────────────── */
+  .benefits-bg-wrap {
+    display: block; /* revealed on mobile */
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
   .benefits-bg-img {
-    object-position: center 75%;
+    object-position: center 65%; /* show lower body, less face = less zoom-in feel */
   }
 
-  /* --- METHOD: image column hidden on mobile --- */
+  /* ── METHOD image: hidden on mobile ─────────────────────── */
   .method-image { display: none; }
 
-  /* Remaining layout adjustments */
+  /* ── Remaining layout resets ─────────────────────────────── */
   .about-grid, .method-grid { grid-template-columns: 1fr; }
   .section, .cta-section { padding: 4rem 1.2rem; }
   .section-title { font-size: clamp(2rem, 7vw, 3rem); }

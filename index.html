@@ -29,7 +29,6 @@
   </button>
 </nav>
 
-<!-- Mobile Menu Drawer -->
 <div class="mobile-menu" id="mobileMenu">
   <a href="#about" onclick="closeMenu()">עליי</a>
   <a href="#benefits" onclick="closeMenu()">מה תקבל</a>
@@ -38,16 +37,21 @@
   <a href="#contact" onclick="closeMenu()">צור קשר</a>
 </div>
 
-<!-- HERO
-     Split into 3 independent zones so desktop and mobile can each do the right thing:
-     1. hero-header  — tag + title.  Always on solid black background.
-     2. hero-image-panel — photo. Hidden on desktop, shown as a block on mobile
-                           between the title and the bio text.
-     3. hero-content — bio paragraph + buttons. Black background on both breakpoints.
--->
+<!-- ═══════════════════════════════════════════════════════════
+     HERO
+     Desktop : solid black background, no photo, text on right side.
+     Mobile  : two zones —
+       • hero-header  → solid black bar (tag + main title).
+       • hero-bottom  → position:relative container.
+           ∟ hero-image-panel (absolute, inset:0) = full-body photo
+             as the background, visible from "אני יהונתן" all the way
+             down to the #about section.
+           ∟ hero-content (relative, z-index 1) = bio text + buttons
+             floating over the image.
+     ═══════════════════════════════════════════════════════════ -->
 <section class="hero">
 
-  <!-- Zone 1: always black, tag + main title -->
+  <!-- Zone 1 — always solid black, tag + main title -->
   <div class="hero-header">
     <div class="hero-tag">ריצה תחרותית | אימון אישי אונליין</div>
     <h1 class="hero-title">
@@ -56,23 +60,27 @@
     </h1>
   </div>
 
-  <!-- Zone 2: photo — hidden on desktop, visible on mobile -->
-  <div class="hero-image-panel">
-    <img src="yoni-main.jpg" alt="Yoni — Team Haim">
-  </div>
+  <!-- Zone 2 — image-as-background + bio text on top (mobile only layout) -->
+  <div class="hero-bottom">
 
-  <!-- Zone 3: bio + CTA — always black -->
-  <div class="hero-content">
-    <p class="hero-sub">
-      אני יהונתן חיים, רץ תחרותי ומאמן ריצה.<br><br>
-      לא עוד תוכנית כללית. אימון מדויק לפי הגוף שלך, המטרה שלך והנתונים שלך.
-    </p>
-    <div class="hero-btns">
-      <a href="#contact" class="btn-gold">קבע שיחת היכרות</a>
-      <a href="https://wa.me/972558814177" target="_blank" class="btn-outline">דבר איתי בוואטסאפ</a>
+    <!-- Photo: hidden on desktop, full-bleed background on mobile -->
+    <div class="hero-image-panel">
+      <img src="yoni-main.jpg" alt="Yoni Haim">
     </div>
-  </div>
 
+    <!-- Bio + CTA: sits above the photo on mobile, normal block on desktop -->
+    <div class="hero-content">
+      <p class="hero-sub">
+        אני יהונתן חיים, רץ תחרותי ומאמן ריצה.<br><br>
+        לא עוד תוכנית כללית. אימון מדויק לפי הגוף שלך, המטרה שלך והנתונים שלך.
+      </p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-gold">קבע שיחת היכרות</a>
+        <a href="https://wa.me/972558814177" target="_blank" class="btn-outline">דבר איתי בוואטסאפ</a>
+      </div>
+    </div>
+
+  </div><!-- /hero-bottom -->
 </section>
 
 <!-- ABOUT -->
@@ -97,7 +105,6 @@
   <div class="section-label">למי זה מתאים</div>
   <h2 class="section-title" style="margin-bottom:0.8rem;">לרצים שרוצים לקחת<br><em style="color:var(--gold);font-style:normal;">את הריצה ברצינות.</em></h2>
   <p style="color:#666;font-size:0.85rem;margin-bottom:3.5rem;max-width:440px;letter-spacing:0.5px;">אם אתה מזדהה עם אחד מהבאים, אני מחכה לך.</p>
-
   <div class="who-grid">
     <div class="who-card" style="padding:2.2rem 2rem;border-left:1px solid rgba(201,168,76,0.15);border-bottom:1px solid rgba(201,168,76,0.15);">
       <div style="font-family:'Bebas Neue',sans-serif;font-size:0.75rem;color:var(--gold);letter-spacing:4px;margin-bottom:1rem;">01</div>
@@ -124,26 +131,29 @@
       <p style="font-size:0.9rem;color:#ccc;line-height:1.8;font-weight:400;">מחפש מאמן שילווה אותך באמת, לא רק ישלח קובץ</p>
     </div>
   </div>
-
   <div style="margin-top:3rem;display:flex;align-items:center;gap:1.5rem;">
     <div style="height:1px;background:rgba(201,168,76,0.3);flex:1;max-width:60px;"></div>
     <p style="font-size:0.95rem;color:var(--gold);font-weight:500;letter-spacing:0.3px;">אם אתה מוכן לעבוד חכם ולהיות עקבי, אני יכול לעזור לך.</p>
   </div>
 </section>
 
-<!-- BENEFITS
-     position/overflow moved to CSS (#benefits).
-     <picture> handles the desktop/mobile image swap natively.
-     Desktop: yoni-train.jpeg | Mobile: yoni-last.jpeg
--->
+<!-- ═══════════════════════════════════════════════════════════
+     BENEFITS — "מה אתה מקבל"
+     Desktop : solid dark background only — NO background photo.
+     Mobile  : yoni-last.jpeg as background image.
+               .benefits-bg-wrap is hidden on desktop via CSS,
+               shown on mobile via CSS. The <picture> tag is not
+               needed here since we use only one image (yoni-last.jpeg)
+               on mobile; desktop has no image at all.
+     ═══════════════════════════════════════════════════════════ -->
 <section class="benefits dark-section" id="benefits">
+
+  <!-- Background image — mobile only. Hidden on desktop via CSS. -->
   <div class="benefits-bg-wrap">
-    <picture>
-      <source media="(max-width: 900px)" srcset="yoni-last.jpeg">
-      <img class="benefits-bg-img" src="yoni-train.jpeg" alt="Training background">
-    </picture>
+    <img class="benefits-bg-img" src="yoni-last.jpeg" alt="">
     <div class="benefits-overlay"></div>
   </div>
+
   <div class="benefits-body">
     <div class="section-label">מה כלול בתוכנית</div>
     <h2 class="section-title">מה אתה <em style="color:var(--gold);font-style:normal">מקבל.</em></h2>
@@ -193,6 +203,7 @@
       <div class="step"><div class="step-num">03</div><div><div class="step-title">אימון חכם ועקבי</div><div class="step-desc">מתאים את עצמו לנתונים שלך בזמן אמת.</div></div></div>
       <div class="step"><div class="step-num">04</div><div><div class="step-title">הגעה לשיא</div><div class="step-desc">מוכן, רענן ובטוח בעצמך בתחרות.</div></div></div>
     </div>
+    <!-- Desktop: visible. Mobile: hidden via CSS. -->
     <div class="method-image">
       <img src="yoni-train.jpeg" alt="Training">
     </div>
@@ -232,14 +243,12 @@
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-logo">TEAM HAIM</div>
   <p class="footer-tag">רצים עם הלב. חוגגים את החיים.</p>
   <p class="footer-bottom">© 2025 Team Haim</p>
 </footer>
 
-<!-- WhatsApp float -->
 <a class="wa-float" href="https://wa.me/972558814177" target="_blank" aria-label="צור קשר בוואטסאפ">💬</a>
 
 <script src="script.js"></script>

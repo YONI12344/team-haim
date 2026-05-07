@@ -39,19 +39,30 @@
 
 <!-- ═══════════════════════════════════════════════════════════
      HERO
-     Desktop : solid black background, no photo, text on right side.
-     Mobile  : two zones —
-       • hero-header  → solid black bar (tag + main title).
-       • hero-bottom  → position:relative container.
-           ∟ hero-image-panel (absolute, inset:0) = full-body photo
-             as the background, visible from "אני יהונתן" all the way
-             down to the #about section.
-           ∟ hero-content (relative, z-index 1) = bio text + buttons
-             floating over the image.
+
+     DESKTOP  — hero-image-panel is position:absolute covering the
+     full section. A right-to-dark gradient (in RTL = left-to-dark
+     visually) lets the photo show on the left while text sits on
+     the dark right side. Exactly the original look.
+
+     MOBILE   — The same hero-image-panel stays absolute, covering
+     the entire hero section.  hero-header gets a solid black
+     background (background:var(--black)) so the title stays on
+     pure black — the image never shows behind it.
+     hero-content has background:transparent and margin-top:auto,
+     so it is pushed to the bottom of the hero. The image is
+     therefore visible in the space between the black title bar and
+     the bio text — it acts as a background without being a
+     separate block element.
      ═══════════════════════════════════════════════════════════ -->
 <section class="hero">
 
-  <!-- Zone 1 — always solid black, tag + main title -->
+  <!-- Photo background — visible on both desktop and mobile -->
+  <div class="hero-image-panel">
+    <img src="yoni-main.jpg" alt="Yoni Haim">
+  </div>
+
+  <!-- Tag + main headline -->
   <div class="hero-header">
     <div class="hero-tag">ריצה תחרותית | אימון אישי אונליין</div>
     <h1 class="hero-title">
@@ -60,27 +71,18 @@
     </h1>
   </div>
 
-  <!-- Zone 2 — image-as-background + bio text on top (mobile only layout) -->
-  <div class="hero-bottom">
-
-    <!-- Photo: hidden on desktop, full-bleed background on mobile -->
-    <div class="hero-image-panel">
-      <img src="yoni-main.jpg" alt="Yoni Haim">
+  <!-- Bio text + CTA buttons -->
+  <div class="hero-content">
+    <p class="hero-sub">
+      אני יהונתן חיים, רץ תחרותי ומאמן ריצה.<br><br>
+      לא עוד תוכנית כללית. אימון מדויק לפי הגוף שלך, המטרה שלך והנתונים שלך.
+    </p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-gold">קבע שיחת היכרות</a>
+      <a href="https://wa.me/972558814177" target="_blank" class="btn-outline">דבר איתי בוואטסאפ</a>
     </div>
+  </div>
 
-    <!-- Bio + CTA: sits above the photo on mobile, normal block on desktop -->
-    <div class="hero-content">
-      <p class="hero-sub">
-        אני יהונתן חיים, רץ תחרותי ומאמן ריצה.<br><br>
-        לא עוד תוכנית כללית. אימון מדויק לפי הגוף שלך, המטרה שלך והנתונים שלך.
-      </p>
-      <div class="hero-btns">
-        <a href="#contact" class="btn-gold">קבע שיחת היכרות</a>
-        <a href="https://wa.me/972558814177" target="_blank" class="btn-outline">דבר איתי בוואטסאפ</a>
-      </div>
-    </div>
-
-  </div><!-- /hero-bottom -->
 </section>
 
 <!-- ABOUT -->
@@ -137,23 +139,16 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════
-     BENEFITS — "מה אתה מקבל"
-     Desktop : solid dark background only — NO background photo.
-     Mobile  : yoni-last.jpeg as background image.
-               .benefits-bg-wrap is hidden on desktop via CSS,
-               shown on mobile via CSS. The <picture> tag is not
-               needed here since we use only one image (yoni-last.jpeg)
-               on mobile; desktop has no image at all.
-     ═══════════════════════════════════════════════════════════ -->
+<!-- BENEFITS
+     Desktop: solid dark background only — background image hidden via CSS.
+     Mobile:  yoni-last.jpeg shown as background via .benefits-bg-wrap
+              which is display:none on desktop and display:block on mobile.
+-->
 <section class="benefits dark-section" id="benefits">
-
-  <!-- Background image — mobile only. Hidden on desktop via CSS. -->
   <div class="benefits-bg-wrap">
     <img class="benefits-bg-img" src="yoni-last.jpeg" alt="">
     <div class="benefits-overlay"></div>
   </div>
-
   <div class="benefits-body">
     <div class="section-label">מה כלול בתוכנית</div>
     <h2 class="section-title">מה אתה <em style="color:var(--gold);font-style:normal">מקבל.</em></h2>
@@ -192,7 +187,7 @@
   </div>
 </section>
 
-<!-- METHOD -->
+<!-- METHOD — Desktop keeps yoni-train.jpeg. Mobile hides it via CSS. -->
 <section class="section" id="method">
   <div class="section-label">איך התהליך נראה</div>
   <div class="method-grid">
@@ -203,7 +198,6 @@
       <div class="step"><div class="step-num">03</div><div><div class="step-title">אימון חכם ועקבי</div><div class="step-desc">מתאים את עצמו לנתונים שלך בזמן אמת.</div></div></div>
       <div class="step"><div class="step-num">04</div><div><div class="step-title">הגעה לשיא</div><div class="step-desc">מוכן, רענן ובטוח בעצמך בתחרות.</div></div></div>
     </div>
-    <!-- Desktop: visible. Mobile: hidden via CSS. -->
     <div class="method-image">
       <img src="yoni-train.jpeg" alt="Training">
     </div>
@@ -232,6 +226,31 @@
   </div>
 </section>
 
+<!-- למי מתאים — RESTORED -->
+<section class="whom-section">
+  <div class="section-label">למי מתאים</div>
+  <h2 class="section-title">בוא נהיה כנים</h2>
+  <div class="whom-grid">
+    <div class="whom-box yes">
+      <div class="whom-box-title">מתאים לך</div>
+      <ul class="whom-list">
+        <li>רוצה להשתפר בריצה באמת</li>
+        <li>רוצה להבין את האימונים לעומק</li>
+        <li>רוצה מסגרת ברורה ומדויקת</li>
+        <li>מוכן לעבוד בצורה עקבית לאורך זמן</li>
+      </ul>
+    </div>
+    <div class="whom-box no">
+      <div class="whom-box-title">פחות מתאים</div>
+      <ul class="whom-list">
+        <li>מחפש קיצורי דרך</li>
+        <li>מחפש פתרונות מהירים</li>
+        <li>לא מוכן לתהליך ארוך טווח</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section class="cta-section" id="contact">
   <div class="section-label">צור קשר</div>
@@ -250,7 +269,6 @@
 </footer>
 
 <a class="wa-float" href="https://wa.me/972558814177" target="_blank" aria-label="צור קשר בוואטסאפ">💬</a>
-
 <script src="script.js"></script>
 </body>
 </html>

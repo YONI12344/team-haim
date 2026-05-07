@@ -276,7 +276,14 @@ footer { background: #080808; padding: 4rem; text-align: center; border-top: 1px
     max-width: 100%;
   }
 
-  .hero-sub { font-size: 0.95rem; max-width: 100%; }
+  .hero-sub {
+    color: var(--gold);          /* gold color */
+    font-size: 1.3rem;          /* slightly larger than default 0.95rem */
+    font-weight: 500;            /* bolder — more readable over image */
+    line-height: 1.75;
+    margin-bottom: 1rem;
+  }
+
   .hero-btns { flex-direction: column; gap: 0.8rem; }
   .btn-gold, .btn-outline { width: 100%; text-align: center; padding: 1rem 1.5rem; font-size: 1rem; }
 

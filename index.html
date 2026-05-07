@@ -40,49 +40,48 @@
 <!-- ═══════════════════════════════════════════════════════════
      HERO
 
-     DESKTOP  — hero-image-panel is position:absolute covering the
-     full section. A right-to-dark gradient (in RTL = left-to-dark
-     visually) lets the photo show on the left while text sits on
-     the dark right side. Exactly the original look.
+     DESKTOP  — CSS grid (direction:ltr override) puts
+     hero-image-panel in the LEFT column (55%) as a contained
+     side panel, and hero-text in the RIGHT column (45%) on
+     a solid black background. No full-bleed, no gradient.
 
-     MOBILE   — The same hero-image-panel stays absolute, covering
-     the entire hero section.  hero-header gets a solid black
-     background (background:var(--black)) so the title stays on
-     pure black — the image never shows behind it.
-     hero-content has background:transparent and margin-top:auto,
-     so it is pushed to the bottom of the hero. The image is
-     therefore visible in the space between the black title bar and
-     the bio text — it acts as a background without being a
-     separate block element.
+     MOBILE   — Flex column. hero-image-panel is position:absolute
+     but its TOP is set to the estimated header height (~11rem) so
+     it starts BELOW the black title bar. Faces appear at the very
+     top of the image zone, not hidden behind the header.
+     hero-content has a top padding that pushes the bio text down
+     into the mid-body area of the image (below the faces).
      ═══════════════════════════════════════════════════════════ -->
 <section class="hero">
 
-  <!-- Photo background — visible on both desktop and mobile -->
+  <!-- Photo — contained left panel on desktop, bg image on mobile -->
   <div class="hero-image-panel">
     <img src="yoni-main.jpg" alt="Yoni Haim">
   </div>
 
-  <!-- Tag + main headline -->
-  <div class="hero-header">
-    <div class="hero-tag">ריצה תחרותית | אימון אישי אונליין</div>
-    <h1 class="hero-title">
-      רצים עם <em>הלב.</em><br>
-      חוגגים את החיים.
-    </h1>
-  </div>
+  <!-- Text wrapper — right column on desktop, stacked on mobile -->
+  <div class="hero-text">
 
-  <!-- Bio text + CTA buttons -->
-  <div class="hero-content">
-    <p class="hero-sub">
-      אני יהונתן חיים, רץ תחרותי ומאמן ריצה.<br><br>
-      לא עוד תוכנית כללית. אימון מדויק לפי הגוף שלך, המטרה שלך והנתונים שלך.
-    </p>
-    <div class="hero-btns">
-      <a href="#contact" class="btn-gold">קבע שיחת היכרות</a>
-      <a href="https://wa.me/972558814177" target="_blank" class="btn-outline">דבר איתי בוואטסאפ</a>
+    <div class="hero-header">
+      <div class="hero-tag">ריצה תחרותית | אימון אישי אונליין</div>
+      <h1 class="hero-title">
+        רצים עם <em>הלב.</em><br>
+        חוגגים את החיים.
+      </h1>
     </div>
-  </div>
 
+    <div class="hero-content">
+      <p class="hero-sub">
+        אני יהונתן חיים, רץ תחרותי ומאמן ריצה.<br><br>
+        לא עוד תוכנית כללית. אימון מדויק לפי הגוף שלך, המטרה שלך והנתונים שלך.
+      </p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-gold">קבע שיחת היכרות</a>
+        <a href="https://wa.me/972558814177" target="_blank" class="btn-outline">דבר איתי בוואטסאפ</a>
+      </div>
+    </div>
+
+  </div><!-- /hero-text -->
 </section>
 
 <!-- ABOUT -->
@@ -139,11 +138,7 @@
   </div>
 </section>
 
-<!-- BENEFITS
-     Desktop: solid dark background only — background image hidden via CSS.
-     Mobile:  yoni-last.jpeg shown as background via .benefits-bg-wrap
-              which is display:none on desktop and display:block on mobile.
--->
+<!-- BENEFITS — no image on desktop, yoni-last.jpeg on mobile -->
 <section class="benefits dark-section" id="benefits">
   <div class="benefits-bg-wrap">
     <img class="benefits-bg-img" src="yoni-last.jpeg" alt="">
@@ -153,41 +148,17 @@
     <div class="section-label">מה כלול בתוכנית</div>
     <h2 class="section-title">מה אתה <em style="color:var(--gold);font-style:normal">מקבל.</em></h2>
     <div class="benefits-grid">
-      <div class="benefit-item">
-        <div class="benefit-num">01</div>
-        <div class="benefit-title">התוכנית שלך. באמת שלך.</div>
-        <div class="benefit-desc">לפי הגוף שלך, והיכולת שלך. כל אימון מתעדכן ומתאים את עצמו אליך.</div>
-      </div>
-      <div class="benefit-item">
-        <div class="benefit-num">02</div>
-        <div class="benefit-title">פרופיל ריצה מדויק</div>
-        <div class="benefit-desc">להבין בדיוק איך אתה רץ היום ומה הדרך הכי חכמה להשתפר.</div>
-      </div>
-      <div class="benefit-item">
-        <div class="benefit-num">03</div>
-        <div class="benefit-title">אימון שמבוסס נתונים</div>
-        <div class="benefit-desc">כל נתון נמדד ומשמש לבניית האימון האידיאלי עבורך.</div>
-      </div>
-      <div class="benefit-item">
-        <div class="benefit-num">04</div>
-        <div class="benefit-title">ליווי וזמינות מלאה</div>
-        <div class="benefit-desc">24/7 מענה לשאלות, התאמות ושינויים. תמיד יש עם מי לדבר.</div>
-      </div>
-      <div class="benefit-item">
-        <div class="benefit-num">05</div>
-        <div class="benefit-title">שיפור אמיתי בגוף</div>
-        <div class="benefit-desc">יותר איזון, גוף חזק ויעיל יותר, לא רק לרוץ, אלא להרגיש טוב יותר.</div>
-      </div>
-      <div class="benefit-item">
-        <div class="benefit-num">06</div>
-        <div class="benefit-title">ההשקעה הכי חשובה</div>
-        <div class="benefit-desc">זה הזמן להתחיל להשקיע בעצמך. הגוף שלך יחזיר לך הרבה יותר.</div>
-      </div>
+      <div class="benefit-item"><div class="benefit-num">01</div><div class="benefit-title">התוכנית שלך. באמת שלך.</div><div class="benefit-desc">לפי הגוף שלך, והיכולת שלך. כל אימון מתעדכן ומתאים את עצמו אליך.</div></div>
+      <div class="benefit-item"><div class="benefit-num">02</div><div class="benefit-title">פרופיל ריצה מדויק</div><div class="benefit-desc">להבין בדיוק איך אתה רץ היום ומה הדרך הכי חכמה להשתפר.</div></div>
+      <div class="benefit-item"><div class="benefit-num">03</div><div class="benefit-title">אימון שמבוסס נתונים</div><div class="benefit-desc">כל נתון נמדד ומשמש לבניית האימון האידיאלי עבורך.</div></div>
+      <div class="benefit-item"><div class="benefit-num">04</div><div class="benefit-title">ליווי וזמינות מלאה</div><div class="benefit-desc">24/7 מענה לשאלות, התאמות ושינויים. תמיד יש עם מי לדבר.</div></div>
+      <div class="benefit-item"><div class="benefit-num">05</div><div class="benefit-title">שיפור אמיתי בגוף</div><div class="benefit-desc">יותר איזון, גוף חזק ויעיל יותר, לא רק לרוץ, אלא להרגיש טוב יותר.</div></div>
+      <div class="benefit-item"><div class="benefit-num">06</div><div class="benefit-title">ההשקעה הכי חשובה</div><div class="benefit-desc">זה הזמן להתחיל להשקיע בעצמך. הגוף שלך יחזיר לך הרבה יותר.</div></div>
     </div>
   </div>
 </section>
 
-<!-- METHOD — Desktop keeps yoni-train.jpeg. Mobile hides it via CSS. -->
+<!-- METHOD — yoni-train.jpeg desktop only -->
 <section class="section" id="method">
   <div class="section-label">איך התהליך נראה</div>
   <div class="method-grid">
@@ -209,9 +180,7 @@
   <div class="cta-inner">
     <div class="section-label">ליווי אישי אונליין</div>
     <h2 class="cta-title">מוכן להפסיק<br>לרוץ במקום?</h2>
-    <p class="cta-body">
-      <strong style="display:block;font-size:1.1rem;color:var(--white);margin-bottom:0.5rem;">יש בך יותר. בוא נוציא את זה.</strong>
-    </p>
+    <p class="cta-body"><strong style="display:block;font-size:1.1rem;color:var(--white);margin-bottom:0.5rem;">יש בך יותר. בוא נוציא את זה.</strong></p>
     <div class="cta-includes">
       <span class="tag">שיחת היכרות</span>
       <span class="tag">תוכנית אישית</span>
@@ -226,7 +195,7 @@
   </div>
 </section>
 
-<!-- למי מתאים — RESTORED -->
+<!-- למי מתאים -->
 <section class="whom-section">
   <div class="section-label">למי מתאים</div>
   <h2 class="section-title">בוא נהיה כנים</h2>

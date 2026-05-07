@@ -236,9 +236,9 @@ footer { background: #080808; padding: 4rem; text-align: center; border-top: 1px
     background: linear-gradient(
       to bottom,
      rgba(12,12,12,0.05) 0%,    /* near-transparent at top */
-    rgba(12,12,12,0.10) 35%,   /* still clear — faces zone */
-    rgba(12,12,12,0.55) 65%,   /* starts darkening */
-    rgba(12,12,12,0.92) 100%   /* very dark at the bottom */
+    rgba(12,12,12,2) 35%,   /* still clear — faces zone */
+    rgba(12,12,12,5) 65%,   /* starts darkening */
+    rgba(12,12,12,10) 100%   /* very dark at the bottom */
   );
 }
  
@@ -277,8 +277,8 @@ footer { background: #080808; padding: 4rem; text-align: center; border-top: 1px
   }
 
   .hero-sub {
-    color: var(--gold);          /* gold color */
-    font-size: 1.3rem;          /* slightly larger than default 0.95rem */
+    color: var(--white);          /* gold color */
+    font-size: 1.2rem;          /* slightly larger than default 0.95rem */
     font-weight: 500;            /* bolder — more readable over image */
     line-height: 1.75;
     margin-bottom: 1rem;

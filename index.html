@@ -38,17 +38,31 @@
   <a href="#contact" onclick="closeMenu()">צור קשר</a>
 </div>
 
-<!-- HERO -->
+<!-- HERO
+     Split into 3 independent zones so desktop and mobile can each do the right thing:
+     1. hero-header  — tag + title.  Always on solid black background.
+     2. hero-image-panel — photo. Hidden on desktop, shown as a block on mobile
+                           between the title and the bio text.
+     3. hero-content — bio paragraph + buttons. Black background on both breakpoints.
+-->
 <section class="hero">
-  <div class="hero-image-panel">
-    <img src="yoni-main.jpg" alt="Yoni Main">
-  </div>
-  <div class="hero-content">
+
+  <!-- Zone 1: always black, tag + main title -->
+  <div class="hero-header">
     <div class="hero-tag">ריצה תחרותית | אימון אישי אונליין</div>
     <h1 class="hero-title">
       רצים עם <em>הלב.</em><br>
       חוגגים את החיים.
     </h1>
+  </div>
+
+  <!-- Zone 2: photo — hidden on desktop, visible on mobile -->
+  <div class="hero-image-panel">
+    <img src="yoni-main.jpg" alt="Yoni — Team Haim">
+  </div>
+
+  <!-- Zone 3: bio + CTA — always black -->
+  <div class="hero-content">
     <p class="hero-sub">
       אני יהונתן חיים, רץ תחרותי ומאמן ריצה.<br><br>
       לא עוד תוכנית כללית. אימון מדויק לפי הגוף שלך, המטרה שלך והנתונים שלך.
@@ -58,6 +72,7 @@
       <a href="https://wa.me/972558814177" target="_blank" class="btn-outline">דבר איתי בוואטסאפ</a>
     </div>
   </div>
+
 </section>
 
 <!-- ABOUT -->
@@ -117,19 +132,19 @@
 </section>
 
 <!-- BENEFITS
-     Desktop shows yoni-train.jpeg, mobile shows yoni-last.jpeg.
-     Swapping is handled by the <picture> element — no JS needed.
-     object-position for each image is controlled via .benefits-bg-img in CSS.
+     position/overflow moved to CSS (#benefits).
+     <picture> handles the desktop/mobile image swap natively.
+     Desktop: yoni-train.jpeg | Mobile: yoni-last.jpeg
 -->
-<section class="benefits dark-section" id="benefits" style="position:relative;overflow:hidden;">
-  <div style="position:absolute;inset:0;z-index:0;">
+<section class="benefits dark-section" id="benefits">
+  <div class="benefits-bg-wrap">
     <picture>
       <source media="(max-width: 900px)" srcset="yoni-last.jpeg">
-      <img class="benefits-bg-img" src="yoni-train.jpeg" alt="Training">
+      <img class="benefits-bg-img" src="yoni-train.jpeg" alt="Training background">
     </picture>
-    <div style="position:absolute;inset:0;background:rgba(12,12,12,0.84);"></div>
+    <div class="benefits-overlay"></div>
   </div>
-  <div style="position:relative;z-index:1;">
+  <div class="benefits-body">
     <div class="section-label">מה כלול בתוכנית</div>
     <h2 class="section-title">מה אתה <em style="color:var(--gold);font-style:normal">מקבל.</em></h2>
     <div class="benefits-grid">
@@ -202,31 +217,6 @@
     <div style="display:flex;gap:1rem;flex-wrap:wrap">
       <a href="#contact" class="btn-gold">קבע שיחת היכרות</a>
       <a href="https://wa.me/972558814177" target="_blank" class="btn-outline">וואטסאפ</a>
-    </div>
-  </div>
-</section>
-
-<!-- FOR WHOM -->
-<section class="whom-section">
-  <div class="section-label">למי מתאים</div>
-  <h2 class="section-title">בוא נהיה כנים</h2>
-  <div class="whom-grid">
-    <div class="whom-box yes">
-      <div class="whom-box-title">מתאים לך</div>
-      <ul class="whom-list">
-        <li>רוצה להשתפר בריצה באמת</li>
-        <li>רוצה להבין את האימונים לעומק</li>
-        <li>רוצה מסגרת ברורה ומדויקת</li>
-        <li>מוכן לעבוד בצורה עקבית לאורך זמן</li>
-      </ul>
-    </div>
-    <div class="whom-box no">
-      <div class="whom-box-title">פחות מתאים</div>
-      <ul class="whom-list">
-        <li>מחפש קיצורי דרך</li>
-        <li>מחפש פתרונות מהירים</li>
-        <li>לא מוכן לתהליך ארוך טווח</li>
-      </ul>
     </div>
   </div>
 </section>

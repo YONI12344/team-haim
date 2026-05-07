@@ -22,7 +22,7 @@ body {
   font-weight: 300;
 }
 
-/* ── NAV ──────────────────────────────────────────────── */
+/* ── NAV ─────────────────────────────────────────────── */
 nav {
   position: fixed; top: 0; right: 0; left: 0; z-index: 100;
   display: flex; justify-content: space-between; align-items: center;
@@ -46,35 +46,68 @@ nav {
 .mobile-menu a { color: var(--white); text-decoration: none; font-size: 1.5rem; font-family: 'Bebas Neue', sans-serif; letter-spacing: 4px; transition: color 0.2s; }
 .mobile-menu a:hover { color: var(--gold); }
 
-/* ── HERO — DESKTOP ───────────────────────────────────────
-   Solid black background. No photo at all.
-   hero-header  (tag + title) and hero-content (bio + buttons)
-   stack vertically and are centred in the viewport.
-   hero-image-panel is HIDDEN on desktop.
-   hero-bottom is a transparent pass-through flex column.
-   ─────────────────────────────────────────────────────── */
+/* ══════════════════════════════════════════════════════
+   HERO — DESKTOP (default / no media query)
+
+   Restores the original look from the very first version:
+   • hero-image-panel is position:absolute, covers the full
+     hero section behind everything.
+   • A horizontal gradient darkens the RIGHT side (in RTL
+     the text column sits on the right), leaving the photo
+     naturally visible on the LEFT.
+   • hero-header and hero-content are position:relative,
+     z-index:1, max-width:580px — they sit on the dark
+     right half of the gradient.
+   ══════════════════════════════════════════════════════ */
 .hero {
   min-height: 100vh;
-  background: var(--black);
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding-top: 68px;
 }
-.hero-header {
-  max-width: 580px;
-  padding: 3rem 4rem 0;
-}
-/* Pass-through container — on desktop it just stacks its children */
-.hero-bottom {
-  max-width: 580px;
-  display: flex;
-  flex-direction: column;
-}
-/* Photo: completely hidden on desktop */
-.hero-image-panel { display: none; }
 
-.hero-content { padding: 1.5rem 4rem 5rem; }
+/* Photo: covers the whole hero on desktop */
+.hero-image-panel {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+.hero-image-panel img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+/* Gradient: left = photo visible, right = dark (where RTL text lives) */
+.hero-image-panel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(12,12,12,0.10) 0%,
+    rgba(12,12,12,0.50) 40%,
+    rgba(12,12,12,0.92) 70%,
+    rgba(12,12,12,0.98) 100%
+  );
+}
+
+/* Text column — sits above the gradient overlay */
+.hero-header {
+  position: relative;
+  z-index: 1;
+  max-width: 580px;
+  padding: 2rem 4rem 0;
+}
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 580px;
+  padding: 1.5rem 4rem 5rem;
+}
 
 .hero-tag { font-size: 0.72rem; font-weight: 400; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; margin-bottom: 2rem; }
 .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 5.5vw, 5.5rem); line-height: 0.95; letter-spacing: 1px; color: var(--white); margin-bottom: 1.5rem; }
@@ -82,19 +115,19 @@ nav {
 .hero-sub { font-size: 1rem; color: rgba(255,255,255,0.85); max-width: 420px; line-height: 1.9; margin-bottom: 2.5rem; font-weight: 300; }
 .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
 
-/* ── BUTTONS ──────────────────────────────────────────── */
+/* ── BUTTONS ─────────────────────────────────────────── */
 .btn-gold { background: var(--gold); color: var(--black); border: none; padding: 0.8rem 2rem; font-family: 'Heebo', sans-serif; font-size: 0.9rem; font-weight: 700; cursor: pointer; letter-spacing: 0.5px; transition: background 0.2s, transform 0.15s; text-decoration: none; display: inline-block; -webkit-tap-highlight-color: transparent; }
 .btn-gold:hover { background: var(--gold-light); transform: translateY(-1px); }
 .btn-outline { background: transparent; color: var(--white); border: 1px solid rgba(201,168,76,0.4); padding: 0.8rem 2rem; font-family: 'Heebo', sans-serif; font-size: 0.9rem; font-weight: 400; cursor: pointer; letter-spacing: 0.5px; transition: border-color 0.2s, color 0.2s, transform 0.15s; text-decoration: none; display: inline-block; -webkit-tap-highlight-color: transparent; }
 .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
 
-/* ── SECTION BASE ─────────────────────────────────────── */
+/* ── SECTION BASE ────────────────────────────────────── */
 .section { padding: 7rem 4rem; }
 .section-label { font-size: 0.7rem; letter-spacing: 5px; color: var(--gold); text-transform: uppercase; margin-bottom: 2rem; display: flex; align-items: center; gap: 1.2rem; }
 .section-label::after { content: ''; flex: 1; height: 1px; background: rgba(201,168,76,0.2); }
 .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.2rem, 4vw, 3.2rem); line-height: 1; letter-spacing: 1px; margin-bottom: 2rem; }
 
-/* ── ABOUT ────────────────────────────────────────────── */
+/* ── ABOUT ───────────────────────────────────────────── */
 .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
 .about-text p { font-size: 0.95rem; line-height: 1.9; color: #aaa; margin-bottom: 1.3rem; }
 .about-text p:last-child { margin-bottom: 0; }
@@ -102,44 +135,35 @@ nav {
 .about-image-stack img { width: 100%; display: block; object-fit: cover; object-position: center 15%; max-height: 420px; }
 .about-image-caption { margin-top: 1rem; font-size: 0.75rem; color: #555; letter-spacing: 1px; text-transform: uppercase; }
 
-/* ── BENEFITS — DESKTOP ───────────────────────────────────
-   Desktop: solid dark background only. NO background photo.
-   .benefits-bg-wrap is hidden by default (desktop); it is
-   revealed only on mobile via the @media block below.
-   ─────────────────────────────────────────────────────── */
+/* ══════════════════════════════════════════════════════
+   BENEFITS — DESKTOP
+   Solid dark background only. NO photo.
+   .benefits-bg-wrap is hidden here (desktop default)
+   and shown only inside the mobile @media block below.
+   ══════════════════════════════════════════════════════ */
 .dark-section { background: var(--dark); padding: 7rem 4rem; }
+#benefits { position: relative; overflow: hidden; width: 100%; }
 
-#benefits {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-}
-
-/* Background image wrapper — HIDDEN on desktop */
+/* Hidden on desktop — revealed on mobile */
 .benefits-bg-wrap { display: none; }
 
-/* These styles are defined here so they're ready when mobile enables the wrapper */
+/* Styles ready for when mobile enables the wrapper */
 .benefits-bg-wrap {
   position: absolute;
   inset: 0;
   z-index: 0;
 }
 .benefits-bg-img {
-  width: 100%;
-  height: 100%;
+  width: 100%; height: 100%;
   object-fit: cover;
-  object-position: center 30%; /* desktop default — overridden on mobile */
+  object-position: center 65%;
   display: block;
 }
 .benefits-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(12, 12, 12, 0.82);
+  position: absolute; inset: 0;
+  background: rgba(12,12,12,0.82);
 }
-.benefits-body {
-  position: relative;
-  z-index: 1;
-}
+.benefits-body { position: relative; z-index: 1; }
 
 .benefits-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; border: 1px solid rgba(201,168,76,0.12); margin-top: 3rem; }
 .benefit-item { padding: 2.2rem 2.5rem; border-bottom: 1px solid rgba(201,168,76,0.1); border-left: 1px solid rgba(201,168,76,0.1); transition: background 0.2s; }
@@ -148,7 +172,7 @@ nav {
 .benefit-title { font-size: 0.95rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; text-shadow: 0 1px 6px rgba(0,0,0,0.9); }
 .benefit-desc { font-size: 0.85rem; color: #ccc; line-height: 1.7; text-shadow: 0 1px 4px rgba(0,0,0,0.9); }
 
-/* ── METHOD ───────────────────────────────────────────── */
+/* ── METHOD ──────────────────────────────────────────── */
 .method-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; margin-top: 3rem; }
 .step { display: grid; grid-template-columns: 2.5rem 1fr; gap: 1.5rem; padding: 1.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.06); align-items: start; }
 .step-num { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; color: var(--gold); opacity: 0.5; padding-top: 2px; }
@@ -157,7 +181,7 @@ nav {
 .method-image { overflow: hidden; }
 .method-image img { width: 100%; height: 100%; object-fit: cover; object-position: 30% center; display: block; min-height: 500px; }
 
-/* ── CTA ──────────────────────────────────────────────── */
+/* ── CTA ─────────────────────────────────────────────── */
 .cta-section { background: var(--dark2); padding: 7rem 4rem; border-top: 1px solid rgba(201,168,76,0.15); border-bottom: 1px solid rgba(201,168,76,0.15); }
 .cta-inner { max-width: 700px; }
 .cta-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: 1px; color: var(--white); margin-bottom: 1rem; line-height: 1; }
@@ -166,61 +190,94 @@ nav {
 .cta-includes { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2.5rem; }
 .tag { border: 1px solid rgba(201,168,76,0.3); color: var(--gold); padding: 0.4rem 1rem; font-size: 0.78rem; letter-spacing: 1px; }
 
-/* ── WHO GRID ─────────────────────────────────────────── */
+/* ── FOR WHOM (למי מתאים) — RESTORED ────────────────── */
+.whom-section { padding: 7rem 4rem; }
+.whom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem; }
+.whom-box { padding: 2.5rem; border: 1px solid rgba(255,255,255,0.06); }
+.whom-box.yes { border-color: rgba(201,168,76,0.25); }
+.whom-box-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 2px; margin-bottom: 1.8rem; }
+.whom-box.yes .whom-box-title { color: var(--gold); }
+.whom-box.no .whom-box-title { color: #444; }
+.whom-list { list-style: none; }
+.whom-list li { font-size: 0.88rem; color: #999; padding: 0.7rem 0; border-bottom: 1px solid rgba(255,255,255,0.04); display: flex; align-items: center; gap: 1rem; }
+.whom-list li:last-child { border-bottom: none; }
+.whom-box.yes li::before { content: '✓'; color: var(--gold); font-size: 0.7rem; }
+.whom-box.no li::before { content: '✗'; color: #333; font-size: 0.7rem; }
+
+/* ── WHO GRID ────────────────────────────────────────── */
 .who-card { background: var(--black); transition: background 0.25s; -webkit-tap-highlight-color: transparent; }
 .who-card:hover { background: rgba(201,168,76,0.05); }
 .who-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid rgba(201,168,76,0.15); }
 
-/* ── FOOTER ───────────────────────────────────────────── */
+/* ── FOOTER ──────────────────────────────────────────── */
 footer { background: #080808; padding: 4rem; text-align: center; border-top: 1px solid rgba(201,168,76,0.1); }
 .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 6px; color: var(--gold); margin-bottom: 0.5rem; }
 .footer-tag { font-size: 0.8rem; color: #444; margin-bottom: 2.5rem; letter-spacing: 1px; }
 .footer-bottom { font-size: 0.72rem; color: #333; }
 
-/* ── WHATSAPP FLOAT ───────────────────────────────────── */
+/* ── WHATSAPP ────────────────────────────────────────── */
 .wa-float { position: fixed; bottom: 2rem; left: 2rem; z-index: 50; background: #25D366; color: white; width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; text-decoration: none; box-shadow: 0 4px 20px rgba(37,211,102,0.3); transition: transform 0.2s; -webkit-tap-highlight-color: transparent; }
 .wa-float:hover { transform: scale(1.08); }
 
 
-/* ══════════════════════════════════════════════════════════
-   MOBILE  max-width: 900px
-   Every phone-specific override lives here.
-   Desktop rules above are completely untouched.
-   ══════════════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════
+   MOBILE — max-width: 900px
+   All phone overrides here. Desktop rules above untouched.
+   ══════════════════════════════════════════════════════ */
 @media (max-width: 900px) {
 
   nav { padding: 1rem 1.5rem; }
   .nav-links { display: none; }
   .hamburger { display: flex; }
 
-  /* ── HERO — MOBILE ────────────────────────────────────────
-     Two visual zones:
+  /* ══════════════════════════════════════════════════════
+     HERO — MOBILE
 
-     ZONE 1  hero-header
-       Solid black (#0c0c0c). Contains only the tag line and the
-       main headline "רצים עם הלב / חוגגים את החיים."
-       Sits above everything, untouched by the photo.
+     The hero-image-panel stays position:absolute (same as
+     desktop) and still covers the ENTIRE hero section.
 
-     ZONE 2  hero-bottom
-       A position:relative container. Inside it:
-         • hero-image-panel — position:absolute, fills hero-bottom
-           completely. Uses object-position:top so the full body
-           is visible, not just a zoomed-in face. A gradient overlay
-           darkens the lower portion so text stays readable.
-         • hero-content — position:relative z-index:1. The bio text
-           "אני יהונתן..." and the CTA buttons float above the photo.
-       hero-bottom is made tall enough (min-height: max(420px,115vw))
-       so the photo extends all the way down to the #about section.
-     ─────────────────────────────────────────────────────── */
+     The trick for two visual zones is done with backgrounds:
+
+     hero-header  →  background: var(--black)
+       The solid black background hides the image in the
+       title area. Result: title on pure black. ✓
+
+     hero-content →  background: transparent, margin-top: auto
+       Transparent = image shows through behind the bio text.
+       margin-top: auto pushes content to the BOTTOM of the
+       hero, creating a large visible image zone between the
+       black title bar and the bio text. ✓
+
+     The hero min-height: max(640px, 155vw) gives enough
+     room for the full body to be visible.
+     ══════════════════════════════════════════════════════ */
   .hero {
     flex-direction: column;
     justify-content: flex-start;
-    min-height: auto;
-    background: var(--black);
+    min-height: max(640px, 155vw);
     padding-top: 68px;
   }
 
-  /* Zone 1: pure solid black — tag + title only */
+  /* Image panel: same absolute position as desktop */
+  .hero-image-panel {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .hero-image-panel img {
+    object-position: center top; /* start from head, show body downward */
+  }
+  /* Mobile gradient: top = transparent (image visible), bottom = darker */
+  .hero-image-panel::after {
+    background: linear-gradient(
+      to bottom,
+      rgba(12,12,12,0.08) 0%,
+      rgba(12,12,12,0.35) 45%,
+      rgba(12,12,12,0.75) 100%
+    );
+  }
+
+  /* Zone 1 — SOLID BLACK: covers the image behind the title */
   .hero-header {
     max-width: 100%;
     padding: 2.5rem 1.5rem 2rem;
@@ -229,53 +286,14 @@ footer { background: #080808; padding: 4rem; text-align: center; border-top: 1px
     z-index: 2;
   }
 
-  /* Zone 2: the image-as-background container */
-  .hero-bottom {
-    max-width: 100%;
-    position: relative;
-    /* tall enough to show the full body and reach the About section */
-    min-height: max(420px, 115vw);
-    display: flex;
-    flex-direction: column;
-  }
-
-  /* Photo: revealed on mobile as an absolute background */
-  .hero-image-panel {
-    display: block;
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    overflow: hidden;
-  }
-  .hero-image-panel img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    /* "top" shows from the head downward — most of the body is visible */
-    object-position: center top;
-    display: block;
-  }
-  /* Gradient overlay: transparent at top (show image), darker at bottom (readable text) */
-  .hero-image-panel::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to bottom,
-      rgba(12,12,12,0.15) 0%,
-      rgba(12,12,12,0.45) 55%,
-      rgba(12,12,12,0.78) 100%
-    );
-  }
-
-  /* Bio + buttons float above the photo */
+  /* Zone 2 — TRANSPARENT over image: bio text at the bottom */
   .hero-content {
+    max-width: 100%;
+    padding: 1.5rem 1.5rem 2.5rem;
+    background: transparent;
     position: relative;
     z-index: 1;
-    max-width: 100%;
-    padding: 2rem 1.5rem 2.5rem;
-    background: transparent;
-    margin-top: auto; /* pushes content toward the bottom of the image */
+    margin-top: auto;
   }
 
   .hero-title { font-size: clamp(2.8rem, 10vw, 4rem); }
@@ -283,28 +301,20 @@ footer { background: #080808; padding: 4rem; text-align: center; border-top: 1px
   .hero-btns { flex-direction: column; gap: 0.8rem; }
   .btn-gold, .btn-outline { width: 100%; text-align: center; padding: 1rem 1.5rem; font-size: 1rem; }
 
-  /* ── BENEFITS — MOBILE ────────────────────────────────────
-     Show the background image (yoni-last.jpeg) on mobile only.
-     object-position: center 65% shows the lower portion of the
-     photo — less face, more torso/body — so it doesn't compete
-     with the text grid sitting above it.
-     ─────────────────────────────────────────────────────── */
+  /* BENEFITS — show yoni-last.jpeg background on mobile only */
   .benefits-bg-wrap {
-    display: block; /* revealed on mobile */
+    display: block;
     position: absolute;
     inset: 0;
     z-index: 0;
   }
-  .benefits-bg-img {
-    object-position: center 65%; /* show lower body, less face = less zoom-in feel */
-  }
 
-  /* ── METHOD image: hidden on mobile ─────────────────────── */
+  /* METHOD — hide image column on mobile */
   .method-image { display: none; }
 
-  /* ── Remaining layout resets ─────────────────────────────── */
-  .about-grid, .method-grid { grid-template-columns: 1fr; }
-  .section, .cta-section { padding: 4rem 1.2rem; }
+  /* Remaining layout resets */
+  .about-grid, .method-grid, .whom-grid { grid-template-columns: 1fr; }
+  .section, .cta-section, .whom-section { padding: 4rem 1.2rem; }
   .section-title { font-size: clamp(2rem, 7vw, 3rem); }
   .about-grid { gap: 2.5rem; }
   .about-text p { font-size: 0.9rem; }
@@ -335,7 +345,7 @@ footer { background: #080808; padding: 4rem; text-align: center; border-top: 1px
 @media (max-width: 390px) {
   .hero-title { font-size: 2.5rem; }
   .hero-tag { font-size: 0.65rem; }
-  .section, .dark-section, .cta-section { padding: 3rem 1rem; }
+  .section, .dark-section, .cta-section, .whom-section { padding: 3rem 1rem; }
   .section-label { font-size: 0.62rem; letter-spacing: 3px; }
 }
 

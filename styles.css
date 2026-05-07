@@ -63,13 +63,13 @@ nav { position: fixed; top: 0; right: 0; left: 0; z-index: 100; display: flex; j
   direction: rtl;
   position: relative;
   overflow: hidden;
-}
-.hero-image-panel img {
+hero-image-panel img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 20%;
-  display: block;
+
+  /* PLAY WITH THIS */
+  object-position: left center;
 }
 /* Gradient overlay — disabled on desktop (image is in its own clean column) */
 .hero-image-panel::after {
